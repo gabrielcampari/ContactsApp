@@ -1,9 +1,9 @@
 import { Outlet, Link, useLoaderData, Form } from "react-router-dom";
-import { getContacts, createContact } from "../contact"; 
+import { getContacts, createContact } from "../contacts"; 
 
 export async function loader() {
-  const contact = await getContacts();
-  return { contact };
+  const contacts = await getContacts();
+  return { contacts };
 }
 
 export async function action() {
@@ -12,7 +12,7 @@ export async function action() {
 }
 
 export default function Root() {
-  const {contact} = useLoaderData(); 
+  const {contacts} = useLoaderData(); 
   return (
     <>
       <div id="sidebar">
@@ -41,11 +41,11 @@ export default function Root() {
           </Form>
         </div>
         <nav>
-          {contact.length ? ( 
+          {contacts.length ? ( 
           <ul>
-            {contact.map((contact) => ( 
+            {contacts.map((contact) => ( 
             <li key={contact.id}>
-              <Link to ={`contact/${contact.id}`}>
+              <Link to ={`contacts/${contact.id}`}>
                 {contact.first || contact.last ? (
                   <>
                   {contact.first} {contact.last}
